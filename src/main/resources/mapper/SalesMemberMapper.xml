@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sms.mapper.SalesMemberMapper">
+  <resultMap id="BaseResultMap" type="com.sms.entity.SalesMember">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="member_name" jdbcType="VARCHAR" property="memberName" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="qq" jdbcType="VARCHAR" property="qq" />
+    <result column="member_address" jdbcType="VARCHAR" property="memberAddress" />
+    <result column="member_demand" jdbcType="VARCHAR" property="memberDemand" />
+    <result column="belong_salesman" jdbcType="VARCHAR" property="belongSalesman" />
+    <result column="login_count" jdbcType="INTEGER" property="loginCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="current_login_time" jdbcType="TIMESTAMP" property="currentLoginTime" />
+    <result column="shop_count" jdbcType="INTEGER" property="shopCount" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="isOverTime" jdbcType="INTEGER" property="isovertime" />
+    <result column="tbCheckCount" jdbcType="INTEGER" property="tbcheckcount" />
+    <result column="checkCount" jdbcType="INTEGER" property="checkcount" />
+    <result column="voucher" jdbcType="INTEGER" property="voucher" />
+    <result column="freeze_money" jdbcType="DOUBLE" property="freezeMoney" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
+    <result column="needsales" jdbcType="INTEGER" property="needsales" />
+    <result column="leader" jdbcType="INTEGER" property="leader" />
+    <result column="quickNote" jdbcType="INTEGER" property="quicknote" />
+    <result column="last_join_pool_time" jdbcType="TIMESTAMP" property="lastJoinPoolTime" />
+    <result column="product_id" jdbcType="VARCHAR" property="productId" />
+    <result column="reg_origin" jdbcType="VARCHAR" property="regOrigin" />
+    <result column="reg_classify" jdbcType="VARCHAR" property="regClassify" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, member_name, mobile, qq, member_address, member_demand, belong_salesman, login_count, 
+    create_time, current_login_time, shop_count, status, sort, isOverTime, tbCheckCount, 
+    checkCount, voucher, freeze_money, money, needsales, leader, quickNote, last_join_pool_time, 
+    product_id, reg_origin, reg_classify
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jc_sales_member
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByCurrentLoginTime" parameterType="java.util.Map" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from jc_sales_member
+    where 1=1
+    <if test="startTime != null ">
+      and current_login_time &gt;= #{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime != null  ">
+      and current_login_time &lt;= #{endTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+  <select id="selectByMobile" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from jc_sales_member
+    where mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from jc_sales_member
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sms.entity.SalesMember">
+    insert into jc_sales_member (id, member_name, mobile, 
+      qq, member_address, member_demand, 
+      belong_salesman, login_count, create_time, 
+      current_login_time, shop_count, status, 
+      sort, isOverTime, tbCheckCount, 
+      checkCount, voucher, freeze_money, 
+      money, needsales, leader, 
+      quickNote, last_join_pool_time, product_id, 
+      reg_origin, reg_classify)
+    values (#{id,jdbcType=BIGINT}, #{memberName,jdbcType=VARCHAR}, #{mobile,jdbcType=VARCHAR}, 
+      #{qq,jdbcType=VARCHAR}, #{memberAddress,jdbcType=VARCHAR}, #{memberDemand,jdbcType=VARCHAR}, 
+      #{belongSalesman,jdbcType=VARCHAR}, #{loginCount,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{currentLoginTime,jdbcType=TIMESTAMP}, #{shopCount,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{sort,jdbcType=INTEGER}, #{isovertime,jdbcType=INTEGER}, #{tbcheckcount,jdbcType=INTEGER}, 
+      #{checkcount,jdbcType=INTEGER}, #{voucher,jdbcType=INTEGER}, #{freezeMoney,jdbcType=DOUBLE}, 
+      #{money,jdbcType=DOUBLE}, #{needsales,jdbcType=INTEGER}, #{leader,jdbcType=INTEGER}, 
+      #{quicknote,jdbcType=INTEGER}, #{lastJoinPoolTime,jdbcType=TIMESTAMP}, #{productId,jdbcType=VARCHAR}, 
+      #{regOrigin,jdbcType=VARCHAR}, #{regClassify,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sms.entity.SalesMember">
+    insert into jc_sales_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="memberName != null">
+        member_name,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="qq != null">
+        qq,
+      </if>
+      <if test="memberAddress != null">
+        member_address,
+      </if>
+      <if test="memberDemand != null">
+        member_demand,
+      </if>
+      <if test="belongSalesman != null">
+        belong_salesman,
+      </if>
+      <if test="loginCount != null">
+        login_count,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="currentLoginTime != null">
+        current_login_time,
+      </if>
+      <if test="shopCount != null">
+        shop_count,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="isovertime != null">
+        isOverTime,
+      </if>
+      <if test="tbcheckcount != null">
+        tbCheckCount,
+      </if>
+      <if test="checkcount != null">
+        checkCount,
+      </if>
+      <if test="voucher != null">
+        voucher,
+      </if>
+      <if test="freezeMoney != null">
+        freeze_money,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="needsales != null">
+        needsales,
+      </if>
+      <if test="leader != null">
+        leader,
+      </if>
+      <if test="quicknote != null">
+        quickNote,
+      </if>
+      <if test="lastJoinPoolTime != null">
+        last_join_pool_time,
+      </if>
+      <if test="productId != null">
+        product_id,
+      </if>
+      <if test="regOrigin != null">
+        reg_origin,
+      </if>
+      <if test="regClassify != null">
+        reg_classify,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memberName != null">
+        #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="memberAddress != null">
+        #{memberAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="memberDemand != null">
+        #{memberDemand,jdbcType=VARCHAR},
+      </if>
+      <if test="belongSalesman != null">
+        #{belongSalesman,jdbcType=VARCHAR},
+      </if>
+      <if test="loginCount != null">
+        #{loginCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentLoginTime != null">
+        #{currentLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopCount != null">
+        #{shopCount,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isovertime != null">
+        #{isovertime,jdbcType=INTEGER},
+      </if>
+      <if test="tbcheckcount != null">
+        #{tbcheckcount,jdbcType=INTEGER},
+      </if>
+      <if test="checkcount != null">
+        #{checkcount,jdbcType=INTEGER},
+      </if>
+      <if test="voucher != null">
+        #{voucher,jdbcType=INTEGER},
+      </if>
+      <if test="freezeMoney != null">
+        #{freezeMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="needsales != null">
+        #{needsales,jdbcType=INTEGER},
+      </if>
+      <if test="leader != null">
+        #{leader,jdbcType=INTEGER},
+      </if>
+      <if test="quicknote != null">
+        #{quicknote,jdbcType=INTEGER},
+      </if>
+      <if test="lastJoinPoolTime != null">
+        #{lastJoinPoolTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productId != null">
+        #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="regOrigin != null">
+        #{regOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="regClassify != null">
+        #{regClassify,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sms.entity.SalesMember">
+    update jc_sales_member
+    <set>
+      <if test="memberName != null">
+        member_name = #{memberName,jdbcType=VARCHAR},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="qq != null">
+        qq = #{qq,jdbcType=VARCHAR},
+      </if>
+      <if test="memberAddress != null">
+        member_address = #{memberAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="memberDemand != null">
+        member_demand = #{memberDemand,jdbcType=VARCHAR},
+      </if>
+      <if test="belongSalesman != null">
+        belong_salesman = #{belongSalesman,jdbcType=VARCHAR},
+      </if>
+      <if test="loginCount != null">
+        login_count = #{loginCount,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentLoginTime != null">
+        current_login_time = #{currentLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopCount != null">
+        shop_count = #{shopCount,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="isovertime != null">
+        isOverTime = #{isovertime,jdbcType=INTEGER},
+      </if>
+      <if test="tbcheckcount != null">
+        tbCheckCount = #{tbcheckcount,jdbcType=INTEGER},
+      </if>
+      <if test="checkcount != null">
+        checkCount = #{checkcount,jdbcType=INTEGER},
+      </if>
+      <if test="voucher != null">
+        voucher = #{voucher,jdbcType=INTEGER},
+      </if>
+      <if test="freezeMoney != null">
+        freeze_money = #{freezeMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="needsales != null">
+        needsales = #{needsales,jdbcType=INTEGER},
+      </if>
+      <if test="leader != null">
+        leader = #{leader,jdbcType=INTEGER},
+      </if>
+      <if test="quicknote != null">
+        quickNote = #{quicknote,jdbcType=INTEGER},
+      </if>
+      <if test="lastJoinPoolTime != null">
+        last_join_pool_time = #{lastJoinPoolTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="productId != null">
+        product_id = #{productId,jdbcType=VARCHAR},
+      </if>
+      <if test="regOrigin != null">
+        reg_origin = #{regOrigin,jdbcType=VARCHAR},
+      </if>
+      <if test="regClassify != null">
+        reg_classify = #{regClassify,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sms.entity.SalesMember">
+    update jc_sales_member
+    set member_name = #{memberName,jdbcType=VARCHAR},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      qq = #{qq,jdbcType=VARCHAR},
+      member_address = #{memberAddress,jdbcType=VARCHAR},
+      member_demand = #{memberDemand,jdbcType=VARCHAR},
+      belong_salesman = #{belongSalesman,jdbcType=VARCHAR},
+      login_count = #{loginCount,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      current_login_time = #{currentLoginTime,jdbcType=TIMESTAMP},
+      shop_count = #{shopCount,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      isOverTime = #{isovertime,jdbcType=INTEGER},
+      tbCheckCount = #{tbcheckcount,jdbcType=INTEGER},
+      checkCount = #{checkcount,jdbcType=INTEGER},
+      voucher = #{voucher,jdbcType=INTEGER},
+      freeze_money = #{freezeMoney,jdbcType=DOUBLE},
+      money = #{money,jdbcType=DOUBLE},
+      needsales = #{needsales,jdbcType=INTEGER},
+      leader = #{leader,jdbcType=INTEGER},
+      quickNote = #{quicknote,jdbcType=INTEGER},
+      last_join_pool_time = #{lastJoinPoolTime,jdbcType=TIMESTAMP},
+      product_id = #{productId,jdbcType=VARCHAR},
+      reg_origin = #{regOrigin,jdbcType=VARCHAR},
+      reg_classify = #{regClassify,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

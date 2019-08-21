@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sms.mapper.SendMemberSmsMapper">
+  <resultMap id="BaseResultMap" type="com.sms.entity.SendMemberSms">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="batch_id" jdbcType="VARCHAR" property="batchId" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="msg_send_time" jdbcType="TIMESTAMP" property="msgSendTime" />
+    <result column="one_day_time" jdbcType="TIMESTAMP" property="oneDayTime" />
+    <result column="one_week_time" jdbcType="TIMESTAMP" property="oneWeekTime" />
+    <result column="fifteenth_time" jdbcType="TIMESTAMP" property="fifteenthTime" />
+    <result column="member_type" jdbcType="INTEGER" property="memberType" />
+    <result column="is_need_do" jdbcType="VARCHAR" property="isNeedDo" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, batch_id, member_id, mobile, msg_send_time, one_day_time, one_week_time, fifteenth_time, 
+    member_type, is_need_do
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from send_member_sms
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByIsNeedDo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from send_member_sms
+    where is_need_do = #{isNeedDo,jdbcType=VARCHAR}
+  </select>
+  <select id="selectByMobile" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from send_member_sms
+    where mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+  <select id="selectOneDayCountByBatchId" parameterType="java.lang.String" resultType="java.lang.Long">
+    SELECT
+    count(one_day_time)
+    FROM
+    send_member_sms
+    WHERE
+    one_day_time IS NOT NULL
+    AND batch_id = #{batchId,jdbcType=VARCHAR};
+  </select>
+  <select id="selectOneWeekCountByBatchId" parameterType="java.lang.String" resultType="java.lang.Long">
+    SELECT
+    count(one_week_time)
+    FROM
+    send_member_sms
+    WHERE
+    one_week_time IS NOT NULL
+    AND batch_id = #{batchId,jdbcType=VARCHAR};
+  </select>
+  <select id="selectFifteenthTimeCountByBatchId" parameterType="java.lang.String" resultType="java.lang.Long">
+    SELECT
+    count(fifteenth_time)
+    FROM
+    send_member_sms
+    WHERE
+    fifteenth_time IS NOT NULL
+    AND batch_id = #{batchId,jdbcType=VARCHAR};
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from send_member_sms
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sms.entity.SendMemberSms">
+    insert into send_member_sms (id, batch_id, member_id, 
+      mobile, msg_send_time, one_day_time, 
+      one_week_time, fifteenth_time, member_type, 
+      is_need_do)
+    values (#{id,jdbcType=BIGINT}, #{batchId,jdbcType=VARCHAR}, #{memberId,jdbcType=BIGINT}, 
+      #{mobile,jdbcType=VARCHAR}, #{msgSendTime,jdbcType=TIMESTAMP}, #{oneDayTime,jdbcType=TIMESTAMP}, 
+      #{oneWeekTime,jdbcType=TIMESTAMP}, #{fifteenthTime,jdbcType=TIMESTAMP}, #{memberType,jdbcType=INTEGER}, 
+      #{isNeedDo,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sms.entity.SendMemberSms">
+    insert into send_member_sms
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchId != null">
+        batch_id,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="msgSendTime != null">
+        msg_send_time,
+      </if>
+      <if test="oneDayTime != null">
+        one_day_time,
+      </if>
+      <if test="oneWeekTime != null">
+        one_week_time,
+      </if>
+      <if test="fifteenthTime != null">
+        fifteenth_time,
+      </if>
+      <if test="memberType != null">
+        member_type,
+      </if>
+      <if test="isNeedDo != null">
+        is_need_do,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="msgSendTime != null">
+        #{msgSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oneDayTime != null">
+        #{oneDayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oneWeekTime != null">
+        #{oneWeekTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fifteenthTime != null">
+        #{fifteenthTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberType != null">
+        #{memberType,jdbcType=INTEGER},
+      </if>
+      <if test="isNeedDo != null">
+        #{isNeedDo,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sms.entity.SendMemberSms">
+    update send_member_sms
+    <set>
+      <if test="batchId != null">
+        batch_id = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="msgSendTime != null">
+        msg_send_time = #{msgSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oneDayTime != null">
+        one_day_time = #{oneDayTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="oneWeekTime != null">
+        one_week_time = #{oneWeekTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="fifteenthTime != null">
+        fifteenth_time = #{fifteenthTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberType != null">
+        member_type = #{memberType,jdbcType=INTEGER},
+      </if>
+      <if test="isNeedDo != null">
+        is_need_do = #{isNeedDo,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sms.entity.SendMemberSms">
+    update send_member_sms
+    set batch_id = #{batchId,jdbcType=VARCHAR},
+      member_id = #{memberId,jdbcType=BIGINT},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      msg_send_time = #{msgSendTime,jdbcType=TIMESTAMP},
+      one_day_time = #{oneDayTime,jdbcType=TIMESTAMP},
+      one_week_time = #{oneWeekTime,jdbcType=TIMESTAMP},
+      fifteenth_time = #{fifteenthTime,jdbcType=TIMESTAMP},
+      member_type = #{memberType,jdbcType=INTEGER},
+      is_need_do = #{isNeedDo,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

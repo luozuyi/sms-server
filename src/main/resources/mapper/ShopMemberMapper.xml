@@ -1,0 +1,793 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sms.mapper.ShopMemberMapper">
+  <resultMap id="BaseResultMap" type="com.sms.entity.ShopMember">
+    <id column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="group_id" jdbcType="BIGINT" property="groupId" />
+    <result column="website_id" jdbcType="BIGINT" property="websiteId" />
+    <result column="business_id" jdbcType="BIGINT" property="businessId" />
+    <result column="userdegree_id" jdbcType="BIGINT" property="userdegreeId" />
+    <result column="familymembers_id" jdbcType="BIGINT" property="familymembersId" />
+    <result column="incomedesc_id" jdbcType="BIGINT" property="incomedescId" />
+    <result column="workseniority_id" jdbcType="BIGINT" property="workseniorityId" />
+    <result column="degree_id" jdbcType="BIGINT" property="degreeId" />
+    <result column="realname" jdbcType="VARCHAR" property="realname" />
+    <result column="gender" jdbcType="BIT" property="gender" />
+    <result column="birthday" jdbcType="DATE" property="birthday" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="tel" jdbcType="VARCHAR" property="tel" />
+    <result column="score" jdbcType="INTEGER" property="score" />
+    <result column="freezeScore" jdbcType="INTEGER" property="freezescore" />
+    <result column="money" jdbcType="DOUBLE" property="money" />
+    <result column="company" jdbcType="VARCHAR" property="company" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="marriage" jdbcType="BIT" property="marriage" />
+    <result column="is_car" jdbcType="BIT" property="isCar" />
+    <result column="position" jdbcType="VARCHAR" property="position" />
+    <result column="schoolTag" jdbcType="VARCHAR" property="schooltag" />
+    <result column="schoolTagDate" jdbcType="DATE" property="schooltagdate" />
+    <result column="favoriteBrand" jdbcType="VARCHAR" property="favoritebrand" />
+    <result column="favoriteStar" jdbcType="VARCHAR" property="favoritestar" />
+    <result column="favoriteMovie" jdbcType="VARCHAR" property="favoritemovie" />
+    <result column="favoritePersonage" jdbcType="VARCHAR" property="favoritepersonage" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="freeze_money" jdbcType="DOUBLE" property="freezeMoney" />
+    <result column="deposit" jdbcType="DOUBLE" property="deposit" />
+    <result column="amercement" jdbcType="DOUBLE" property="amercement" />
+    <result column="img1" jdbcType="VARCHAR" property="img1" />
+    <result column="img2" jdbcType="VARCHAR" property="img2" />
+    <result column="img3" jdbcType="VARCHAR" property="img3" />
+    <result column="img4" jdbcType="VARCHAR" property="img4" />
+    <result column="img5" jdbcType="VARCHAR" property="img5" />
+    <result column="img6" jdbcType="VARCHAR" property="img6" />
+    <result column="is_img1" jdbcType="INTEGER" property="isImg1" />
+    <result column="is_img2" jdbcType="INTEGER" property="isImg2" />
+    <result column="is_img3" jdbcType="INTEGER" property="isImg3" />
+    <result column="is_img4" jdbcType="INTEGER" property="isImg4" />
+    <result column="is_img5" jdbcType="INTEGER" property="isImg5" />
+    <result column="is_img6" jdbcType="INTEGER" property="isImg6" />
+    <result column="tbCheckCount" jdbcType="INTEGER" property="tbcheckcount" />
+    <result column="checkCount" jdbcType="INTEGER" property="checkcount" />
+    <result column="shareTime" jdbcType="TIMESTAMP" property="sharetime" />
+    <result column="shareCount" jdbcType="INTEGER" property="sharecount" />
+    <result column="tbShareCheckCount" jdbcType="INTEGER" property="tbsharecheckcount" />
+    <result column="tmShareCheckCount" jdbcType="INTEGER" property="tmsharecheckcount" />
+    <result column="count" jdbcType="INTEGER" property="count" />
+    <result column="productCount" jdbcType="INTEGER" property="productcount" />
+    <result column="voucher" jdbcType="INTEGER" property="voucher" />
+    <result column="answerno" jdbcType="INTEGER" property="answerno" />
+    <result column="sort" jdbcType="INTEGER" property="sort" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="emark" jdbcType="INTEGER" property="emark" />
+    <result column="etbcard" jdbcType="INTEGER" property="etbcard" />
+    <result column="etmcard" jdbcType="INTEGER" property="etmcard" />
+    <result column="etbused" jdbcType="INTEGER" property="etbused" />
+    <result column="etmused" jdbcType="INTEGER" property="etmused" />
+    <result column="partnerId" jdbcType="INTEGER" property="partnerid" />
+    <result column="origin_type" jdbcType="VARCHAR" property="originType" />
+    <result column="beSalman" jdbcType="VARCHAR" property="besalman" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    member_id, group_id, website_id, business_id, userdegree_id, familymembers_id, incomedesc_id, 
+    workseniority_id, degree_id, realname, gender, birthday, mobile, tel, score, freezeScore, 
+    money, company, avatar, marriage, is_car, position, schoolTag, schoolTagDate, favoriteBrand, 
+    favoriteStar, favoriteMovie, favoritePersonage, address, freeze_money, deposit, amercement, 
+    img1, img2, img3, img4, img5, img6, is_img1, is_img2, is_img3, is_img4, is_img5, 
+    is_img6, tbCheckCount, checkCount, shareTime, shareCount, tbShareCheckCount, tmShareCheckCount, 
+    count, productCount, voucher, answerno, sort, remark, emark, etbcard, etmcard, etbused, 
+    etmused, partnerId, origin_type, beSalman
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jc_shop_member
+    where member_id = #{memberId,jdbcType=BIGINT}
+  </select>
+  <select id="selectMemberIdByMobile" parameterType="java.lang.String" resultType="java.lang.Long">
+    select
+    member_id as memberId
+    from jc_shop_member
+    where mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from jc_shop_member
+    where member_id = #{memberId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sms.entity.ShopMember">
+    insert into jc_shop_member (member_id, group_id, website_id, 
+      business_id, userdegree_id, familymembers_id, 
+      incomedesc_id, workseniority_id, degree_id, 
+      realname, gender, birthday, 
+      mobile, tel, score, 
+      freezeScore, money, company, 
+      avatar, marriage, is_car, position, 
+      schoolTag, schoolTagDate, favoriteBrand, 
+      favoriteStar, favoriteMovie, favoritePersonage, 
+      address, freeze_money, deposit, 
+      amercement, img1, img2, 
+      img3, img4, img5, img6, 
+      is_img1, is_img2, is_img3, 
+      is_img4, is_img5, is_img6, 
+      tbCheckCount, checkCount, shareTime, 
+      shareCount, tbShareCheckCount, tmShareCheckCount, 
+      count, productCount, voucher, 
+      answerno, sort, remark, 
+      emark, etbcard, etmcard, 
+      etbused, etmused, partnerId, 
+      origin_type, beSalman)
+    values (#{memberId,jdbcType=BIGINT}, #{groupId,jdbcType=BIGINT}, #{websiteId,jdbcType=BIGINT}, 
+      #{businessId,jdbcType=BIGINT}, #{userdegreeId,jdbcType=BIGINT}, #{familymembersId,jdbcType=BIGINT}, 
+      #{incomedescId,jdbcType=BIGINT}, #{workseniorityId,jdbcType=BIGINT}, #{degreeId,jdbcType=BIGINT}, 
+      #{realname,jdbcType=VARCHAR}, #{gender,jdbcType=BIT}, #{birthday,jdbcType=DATE}, 
+      #{mobile,jdbcType=VARCHAR}, #{tel,jdbcType=VARCHAR}, #{score,jdbcType=INTEGER}, 
+      #{freezescore,jdbcType=INTEGER}, #{money,jdbcType=DOUBLE}, #{company,jdbcType=VARCHAR}, 
+      #{avatar,jdbcType=VARCHAR}, #{marriage,jdbcType=BIT}, #{isCar,jdbcType=BIT}, #{position,jdbcType=VARCHAR}, 
+      #{schooltag,jdbcType=VARCHAR}, #{schooltagdate,jdbcType=DATE}, #{favoritebrand,jdbcType=VARCHAR}, 
+      #{favoritestar,jdbcType=VARCHAR}, #{favoritemovie,jdbcType=VARCHAR}, #{favoritepersonage,jdbcType=VARCHAR}, 
+      #{address,jdbcType=VARCHAR}, #{freezeMoney,jdbcType=DOUBLE}, #{deposit,jdbcType=DOUBLE}, 
+      #{amercement,jdbcType=DOUBLE}, #{img1,jdbcType=VARCHAR}, #{img2,jdbcType=VARCHAR}, 
+      #{img3,jdbcType=VARCHAR}, #{img4,jdbcType=VARCHAR}, #{img5,jdbcType=VARCHAR}, #{img6,jdbcType=VARCHAR}, 
+      #{isImg1,jdbcType=INTEGER}, #{isImg2,jdbcType=INTEGER}, #{isImg3,jdbcType=INTEGER}, 
+      #{isImg4,jdbcType=INTEGER}, #{isImg5,jdbcType=INTEGER}, #{isImg6,jdbcType=INTEGER}, 
+      #{tbcheckcount,jdbcType=INTEGER}, #{checkcount,jdbcType=INTEGER}, #{sharetime,jdbcType=TIMESTAMP}, 
+      #{sharecount,jdbcType=INTEGER}, #{tbsharecheckcount,jdbcType=INTEGER}, #{tmsharecheckcount,jdbcType=INTEGER}, 
+      #{count,jdbcType=INTEGER}, #{productcount,jdbcType=INTEGER}, #{voucher,jdbcType=INTEGER}, 
+      #{answerno,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, 
+      #{emark,jdbcType=INTEGER}, #{etbcard,jdbcType=INTEGER}, #{etmcard,jdbcType=INTEGER}, 
+      #{etbused,jdbcType=INTEGER}, #{etmused,jdbcType=INTEGER}, #{partnerid,jdbcType=INTEGER}, 
+      #{originType,jdbcType=VARCHAR}, #{besalman,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sms.entity.ShopMember">
+    insert into jc_shop_member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="groupId != null">
+        group_id,
+      </if>
+      <if test="websiteId != null">
+        website_id,
+      </if>
+      <if test="businessId != null">
+        business_id,
+      </if>
+      <if test="userdegreeId != null">
+        userdegree_id,
+      </if>
+      <if test="familymembersId != null">
+        familymembers_id,
+      </if>
+      <if test="incomedescId != null">
+        incomedesc_id,
+      </if>
+      <if test="workseniorityId != null">
+        workseniority_id,
+      </if>
+      <if test="degreeId != null">
+        degree_id,
+      </if>
+      <if test="realname != null">
+        realname,
+      </if>
+      <if test="gender != null">
+        gender,
+      </if>
+      <if test="birthday != null">
+        birthday,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="tel != null">
+        tel,
+      </if>
+      <if test="score != null">
+        score,
+      </if>
+      <if test="freezescore != null">
+        freezeScore,
+      </if>
+      <if test="money != null">
+        money,
+      </if>
+      <if test="company != null">
+        company,
+      </if>
+      <if test="avatar != null">
+        avatar,
+      </if>
+      <if test="marriage != null">
+        marriage,
+      </if>
+      <if test="isCar != null">
+        is_car,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="schooltag != null">
+        schoolTag,
+      </if>
+      <if test="schooltagdate != null">
+        schoolTagDate,
+      </if>
+      <if test="favoritebrand != null">
+        favoriteBrand,
+      </if>
+      <if test="favoritestar != null">
+        favoriteStar,
+      </if>
+      <if test="favoritemovie != null">
+        favoriteMovie,
+      </if>
+      <if test="favoritepersonage != null">
+        favoritePersonage,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="freezeMoney != null">
+        freeze_money,
+      </if>
+      <if test="deposit != null">
+        deposit,
+      </if>
+      <if test="amercement != null">
+        amercement,
+      </if>
+      <if test="img1 != null">
+        img1,
+      </if>
+      <if test="img2 != null">
+        img2,
+      </if>
+      <if test="img3 != null">
+        img3,
+      </if>
+      <if test="img4 != null">
+        img4,
+      </if>
+      <if test="img5 != null">
+        img5,
+      </if>
+      <if test="img6 != null">
+        img6,
+      </if>
+      <if test="isImg1 != null">
+        is_img1,
+      </if>
+      <if test="isImg2 != null">
+        is_img2,
+      </if>
+      <if test="isImg3 != null">
+        is_img3,
+      </if>
+      <if test="isImg4 != null">
+        is_img4,
+      </if>
+      <if test="isImg5 != null">
+        is_img5,
+      </if>
+      <if test="isImg6 != null">
+        is_img6,
+      </if>
+      <if test="tbcheckcount != null">
+        tbCheckCount,
+      </if>
+      <if test="checkcount != null">
+        checkCount,
+      </if>
+      <if test="sharetime != null">
+        shareTime,
+      </if>
+      <if test="sharecount != null">
+        shareCount,
+      </if>
+      <if test="tbsharecheckcount != null">
+        tbShareCheckCount,
+      </if>
+      <if test="tmsharecheckcount != null">
+        tmShareCheckCount,
+      </if>
+      <if test="count != null">
+        count,
+      </if>
+      <if test="productcount != null">
+        productCount,
+      </if>
+      <if test="voucher != null">
+        voucher,
+      </if>
+      <if test="answerno != null">
+        answerno,
+      </if>
+      <if test="sort != null">
+        sort,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="emark != null">
+        emark,
+      </if>
+      <if test="etbcard != null">
+        etbcard,
+      </if>
+      <if test="etmcard != null">
+        etmcard,
+      </if>
+      <if test="etbused != null">
+        etbused,
+      </if>
+      <if test="etmused != null">
+        etmused,
+      </if>
+      <if test="partnerid != null">
+        partnerId,
+      </if>
+      <if test="originType != null">
+        origin_type,
+      </if>
+      <if test="besalman != null">
+        beSalman,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memberId != null">
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="groupId != null">
+        #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="websiteId != null">
+        #{websiteId,jdbcType=BIGINT},
+      </if>
+      <if test="businessId != null">
+        #{businessId,jdbcType=BIGINT},
+      </if>
+      <if test="userdegreeId != null">
+        #{userdegreeId,jdbcType=BIGINT},
+      </if>
+      <if test="familymembersId != null">
+        #{familymembersId,jdbcType=BIGINT},
+      </if>
+      <if test="incomedescId != null">
+        #{incomedescId,jdbcType=BIGINT},
+      </if>
+      <if test="workseniorityId != null">
+        #{workseniorityId,jdbcType=BIGINT},
+      </if>
+      <if test="degreeId != null">
+        #{degreeId,jdbcType=BIGINT},
+      </if>
+      <if test="realname != null">
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=BIT},
+      </if>
+      <if test="birthday != null">
+        #{birthday,jdbcType=DATE},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        #{score,jdbcType=INTEGER},
+      </if>
+      <if test="freezescore != null">
+        #{freezescore,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="company != null">
+        #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null">
+        #{marriage,jdbcType=BIT},
+      </if>
+      <if test="isCar != null">
+        #{isCar,jdbcType=BIT},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="schooltag != null">
+        #{schooltag,jdbcType=VARCHAR},
+      </if>
+      <if test="schooltagdate != null">
+        #{schooltagdate,jdbcType=DATE},
+      </if>
+      <if test="favoritebrand != null">
+        #{favoritebrand,jdbcType=VARCHAR},
+      </if>
+      <if test="favoritestar != null">
+        #{favoritestar,jdbcType=VARCHAR},
+      </if>
+      <if test="favoritemovie != null">
+        #{favoritemovie,jdbcType=VARCHAR},
+      </if>
+      <if test="favoritepersonage != null">
+        #{favoritepersonage,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="freezeMoney != null">
+        #{freezeMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="deposit != null">
+        #{deposit,jdbcType=DOUBLE},
+      </if>
+      <if test="amercement != null">
+        #{amercement,jdbcType=DOUBLE},
+      </if>
+      <if test="img1 != null">
+        #{img1,jdbcType=VARCHAR},
+      </if>
+      <if test="img2 != null">
+        #{img2,jdbcType=VARCHAR},
+      </if>
+      <if test="img3 != null">
+        #{img3,jdbcType=VARCHAR},
+      </if>
+      <if test="img4 != null">
+        #{img4,jdbcType=VARCHAR},
+      </if>
+      <if test="img5 != null">
+        #{img5,jdbcType=VARCHAR},
+      </if>
+      <if test="img6 != null">
+        #{img6,jdbcType=VARCHAR},
+      </if>
+      <if test="isImg1 != null">
+        #{isImg1,jdbcType=INTEGER},
+      </if>
+      <if test="isImg2 != null">
+        #{isImg2,jdbcType=INTEGER},
+      </if>
+      <if test="isImg3 != null">
+        #{isImg3,jdbcType=INTEGER},
+      </if>
+      <if test="isImg4 != null">
+        #{isImg4,jdbcType=INTEGER},
+      </if>
+      <if test="isImg5 != null">
+        #{isImg5,jdbcType=INTEGER},
+      </if>
+      <if test="isImg6 != null">
+        #{isImg6,jdbcType=INTEGER},
+      </if>
+      <if test="tbcheckcount != null">
+        #{tbcheckcount,jdbcType=INTEGER},
+      </if>
+      <if test="checkcount != null">
+        #{checkcount,jdbcType=INTEGER},
+      </if>
+      <if test="sharetime != null">
+        #{sharetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sharecount != null">
+        #{sharecount,jdbcType=INTEGER},
+      </if>
+      <if test="tbsharecheckcount != null">
+        #{tbsharecheckcount,jdbcType=INTEGER},
+      </if>
+      <if test="tmsharecheckcount != null">
+        #{tmsharecheckcount,jdbcType=INTEGER},
+      </if>
+      <if test="count != null">
+        #{count,jdbcType=INTEGER},
+      </if>
+      <if test="productcount != null">
+        #{productcount,jdbcType=INTEGER},
+      </if>
+      <if test="voucher != null">
+        #{voucher,jdbcType=INTEGER},
+      </if>
+      <if test="answerno != null">
+        #{answerno,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="emark != null">
+        #{emark,jdbcType=INTEGER},
+      </if>
+      <if test="etbcard != null">
+        #{etbcard,jdbcType=INTEGER},
+      </if>
+      <if test="etmcard != null">
+        #{etmcard,jdbcType=INTEGER},
+      </if>
+      <if test="etbused != null">
+        #{etbused,jdbcType=INTEGER},
+      </if>
+      <if test="etmused != null">
+        #{etmused,jdbcType=INTEGER},
+      </if>
+      <if test="partnerid != null">
+        #{partnerid,jdbcType=INTEGER},
+      </if>
+      <if test="originType != null">
+        #{originType,jdbcType=VARCHAR},
+      </if>
+      <if test="besalman != null">
+        #{besalman,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sms.entity.ShopMember">
+    update jc_shop_member
+    <set>
+      <if test="groupId != null">
+        group_id = #{groupId,jdbcType=BIGINT},
+      </if>
+      <if test="websiteId != null">
+        website_id = #{websiteId,jdbcType=BIGINT},
+      </if>
+      <if test="businessId != null">
+        business_id = #{businessId,jdbcType=BIGINT},
+      </if>
+      <if test="userdegreeId != null">
+        userdegree_id = #{userdegreeId,jdbcType=BIGINT},
+      </if>
+      <if test="familymembersId != null">
+        familymembers_id = #{familymembersId,jdbcType=BIGINT},
+      </if>
+      <if test="incomedescId != null">
+        incomedesc_id = #{incomedescId,jdbcType=BIGINT},
+      </if>
+      <if test="workseniorityId != null">
+        workseniority_id = #{workseniorityId,jdbcType=BIGINT},
+      </if>
+      <if test="degreeId != null">
+        degree_id = #{degreeId,jdbcType=BIGINT},
+      </if>
+      <if test="realname != null">
+        realname = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        gender = #{gender,jdbcType=BIT},
+      </if>
+      <if test="birthday != null">
+        birthday = #{birthday,jdbcType=DATE},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="tel != null">
+        tel = #{tel,jdbcType=VARCHAR},
+      </if>
+      <if test="score != null">
+        score = #{score,jdbcType=INTEGER},
+      </if>
+      <if test="freezescore != null">
+        freezeScore = #{freezescore,jdbcType=INTEGER},
+      </if>
+      <if test="money != null">
+        money = #{money,jdbcType=DOUBLE},
+      </if>
+      <if test="company != null">
+        company = #{company,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null">
+        marriage = #{marriage,jdbcType=BIT},
+      </if>
+      <if test="isCar != null">
+        is_car = #{isCar,jdbcType=BIT},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="schooltag != null">
+        schoolTag = #{schooltag,jdbcType=VARCHAR},
+      </if>
+      <if test="schooltagdate != null">
+        schoolTagDate = #{schooltagdate,jdbcType=DATE},
+      </if>
+      <if test="favoritebrand != null">
+        favoriteBrand = #{favoritebrand,jdbcType=VARCHAR},
+      </if>
+      <if test="favoritestar != null">
+        favoriteStar = #{favoritestar,jdbcType=VARCHAR},
+      </if>
+      <if test="favoritemovie != null">
+        favoriteMovie = #{favoritemovie,jdbcType=VARCHAR},
+      </if>
+      <if test="favoritepersonage != null">
+        favoritePersonage = #{favoritepersonage,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="freezeMoney != null">
+        freeze_money = #{freezeMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="deposit != null">
+        deposit = #{deposit,jdbcType=DOUBLE},
+      </if>
+      <if test="amercement != null">
+        amercement = #{amercement,jdbcType=DOUBLE},
+      </if>
+      <if test="img1 != null">
+        img1 = #{img1,jdbcType=VARCHAR},
+      </if>
+      <if test="img2 != null">
+        img2 = #{img2,jdbcType=VARCHAR},
+      </if>
+      <if test="img3 != null">
+        img3 = #{img3,jdbcType=VARCHAR},
+      </if>
+      <if test="img4 != null">
+        img4 = #{img4,jdbcType=VARCHAR},
+      </if>
+      <if test="img5 != null">
+        img5 = #{img5,jdbcType=VARCHAR},
+      </if>
+      <if test="img6 != null">
+        img6 = #{img6,jdbcType=VARCHAR},
+      </if>
+      <if test="isImg1 != null">
+        is_img1 = #{isImg1,jdbcType=INTEGER},
+      </if>
+      <if test="isImg2 != null">
+        is_img2 = #{isImg2,jdbcType=INTEGER},
+      </if>
+      <if test="isImg3 != null">
+        is_img3 = #{isImg3,jdbcType=INTEGER},
+      </if>
+      <if test="isImg4 != null">
+        is_img4 = #{isImg4,jdbcType=INTEGER},
+      </if>
+      <if test="isImg5 != null">
+        is_img5 = #{isImg5,jdbcType=INTEGER},
+      </if>
+      <if test="isImg6 != null">
+        is_img6 = #{isImg6,jdbcType=INTEGER},
+      </if>
+      <if test="tbcheckcount != null">
+        tbCheckCount = #{tbcheckcount,jdbcType=INTEGER},
+      </if>
+      <if test="checkcount != null">
+        checkCount = #{checkcount,jdbcType=INTEGER},
+      </if>
+      <if test="sharetime != null">
+        shareTime = #{sharetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sharecount != null">
+        shareCount = #{sharecount,jdbcType=INTEGER},
+      </if>
+      <if test="tbsharecheckcount != null">
+        tbShareCheckCount = #{tbsharecheckcount,jdbcType=INTEGER},
+      </if>
+      <if test="tmsharecheckcount != null">
+        tmShareCheckCount = #{tmsharecheckcount,jdbcType=INTEGER},
+      </if>
+      <if test="count != null">
+        count = #{count,jdbcType=INTEGER},
+      </if>
+      <if test="productcount != null">
+        productCount = #{productcount,jdbcType=INTEGER},
+      </if>
+      <if test="voucher != null">
+        voucher = #{voucher,jdbcType=INTEGER},
+      </if>
+      <if test="answerno != null">
+        answerno = #{answerno,jdbcType=INTEGER},
+      </if>
+      <if test="sort != null">
+        sort = #{sort,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="emark != null">
+        emark = #{emark,jdbcType=INTEGER},
+      </if>
+      <if test="etbcard != null">
+        etbcard = #{etbcard,jdbcType=INTEGER},
+      </if>
+      <if test="etmcard != null">
+        etmcard = #{etmcard,jdbcType=INTEGER},
+      </if>
+      <if test="etbused != null">
+        etbused = #{etbused,jdbcType=INTEGER},
+      </if>
+      <if test="etmused != null">
+        etmused = #{etmused,jdbcType=INTEGER},
+      </if>
+      <if test="partnerid != null">
+        partnerId = #{partnerid,jdbcType=INTEGER},
+      </if>
+      <if test="originType != null">
+        origin_type = #{originType,jdbcType=VARCHAR},
+      </if>
+      <if test="besalman != null">
+        beSalman = #{besalman,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where member_id = #{memberId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sms.entity.ShopMember">
+    update jc_shop_member
+    set group_id = #{groupId,jdbcType=BIGINT},
+      website_id = #{websiteId,jdbcType=BIGINT},
+      business_id = #{businessId,jdbcType=BIGINT},
+      userdegree_id = #{userdegreeId,jdbcType=BIGINT},
+      familymembers_id = #{familymembersId,jdbcType=BIGINT},
+      incomedesc_id = #{incomedescId,jdbcType=BIGINT},
+      workseniority_id = #{workseniorityId,jdbcType=BIGINT},
+      degree_id = #{degreeId,jdbcType=BIGINT},
+      realname = #{realname,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=BIT},
+      birthday = #{birthday,jdbcType=DATE},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      tel = #{tel,jdbcType=VARCHAR},
+      score = #{score,jdbcType=INTEGER},
+      freezeScore = #{freezescore,jdbcType=INTEGER},
+      money = #{money,jdbcType=DOUBLE},
+      company = #{company,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      marriage = #{marriage,jdbcType=BIT},
+      is_car = #{isCar,jdbcType=BIT},
+      position = #{position,jdbcType=VARCHAR},
+      schoolTag = #{schooltag,jdbcType=VARCHAR},
+      schoolTagDate = #{schooltagdate,jdbcType=DATE},
+      favoriteBrand = #{favoritebrand,jdbcType=VARCHAR},
+      favoriteStar = #{favoritestar,jdbcType=VARCHAR},
+      favoriteMovie = #{favoritemovie,jdbcType=VARCHAR},
+      favoritePersonage = #{favoritepersonage,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      freeze_money = #{freezeMoney,jdbcType=DOUBLE},
+      deposit = #{deposit,jdbcType=DOUBLE},
+      amercement = #{amercement,jdbcType=DOUBLE},
+      img1 = #{img1,jdbcType=VARCHAR},
+      img2 = #{img2,jdbcType=VARCHAR},
+      img3 = #{img3,jdbcType=VARCHAR},
+      img4 = #{img4,jdbcType=VARCHAR},
+      img5 = #{img5,jdbcType=VARCHAR},
+      img6 = #{img6,jdbcType=VARCHAR},
+      is_img1 = #{isImg1,jdbcType=INTEGER},
+      is_img2 = #{isImg2,jdbcType=INTEGER},
+      is_img3 = #{isImg3,jdbcType=INTEGER},
+      is_img4 = #{isImg4,jdbcType=INTEGER},
+      is_img5 = #{isImg5,jdbcType=INTEGER},
+      is_img6 = #{isImg6,jdbcType=INTEGER},
+      tbCheckCount = #{tbcheckcount,jdbcType=INTEGER},
+      checkCount = #{checkcount,jdbcType=INTEGER},
+      shareTime = #{sharetime,jdbcType=TIMESTAMP},
+      shareCount = #{sharecount,jdbcType=INTEGER},
+      tbShareCheckCount = #{tbsharecheckcount,jdbcType=INTEGER},
+      tmShareCheckCount = #{tmsharecheckcount,jdbcType=INTEGER},
+      count = #{count,jdbcType=INTEGER},
+      productCount = #{productcount,jdbcType=INTEGER},
+      voucher = #{voucher,jdbcType=INTEGER},
+      answerno = #{answerno,jdbcType=INTEGER},
+      sort = #{sort,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      emark = #{emark,jdbcType=INTEGER},
+      etbcard = #{etbcard,jdbcType=INTEGER},
+      etmcard = #{etmcard,jdbcType=INTEGER},
+      etbused = #{etbused,jdbcType=INTEGER},
+      etmused = #{etmused,jdbcType=INTEGER},
+      partnerId = #{partnerid,jdbcType=INTEGER},
+      origin_type = #{originType,jdbcType=VARCHAR},
+      beSalman = #{besalman,jdbcType=VARCHAR}
+    where member_id = #{memberId,jdbcType=BIGINT}
+  </update>
+</mapper>

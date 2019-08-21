@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sms.mapper.CoreUserMapper">
+  <resultMap id="BaseResultMap" type="com.sms.entity.CoreUser">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="password" jdbcType="CHAR" property="password" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="login_count" jdbcType="BIGINT" property="loginCount" />
+    <result column="register_ip" jdbcType="VARCHAR" property="registerIp" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="last_login_ip" jdbcType="VARCHAR" property="lastLoginIp" />
+    <result column="current_login_time" jdbcType="TIMESTAMP" property="currentLoginTime" />
+    <result column="current_login_ip" jdbcType="VARCHAR" property="currentLoginIp" />
+    <result column="reset_key" jdbcType="CHAR" property="resetKey" />
+    <result column="reset_pwd" jdbcType="CHAR" property="resetPwd" />
+    <result column="errTime" jdbcType="TIMESTAMP" property="errtime" />
+    <result column="errCount" jdbcType="INTEGER" property="errcount" />
+    <result column="referee" jdbcType="VARCHAR" property="referee" />
+    <result column="phone_code" jdbcType="VARCHAR" property="phoneCode" />
+    <result column="phone_active" jdbcType="INTEGER" property="phoneActive" />
+    <result column="email_code" jdbcType="VARCHAR" property="emailCode" />
+    <result column="email_active" jdbcType="INTEGER" property="emailActive" />
+    <result column="find_pwd_code" jdbcType="VARCHAR" property="findPwdCode" />
+    <result column="pay_pwd_code" jdbcType="VARCHAR" property="payPwdCode" />
+    <result column="login_status" jdbcType="INTEGER" property="loginStatus" />
+    <result column="elogincount" jdbcType="INTEGER" property="elogincount" />
+    <result column="emark" jdbcType="INTEGER" property="emark" />
+    <result column="prostatus" jdbcType="INTEGER" property="prostatus" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    user_id, username, email, password, create_time, login_count, register_ip, last_login_time, 
+    last_login_ip, current_login_time, current_login_ip, reset_key, reset_pwd, errTime, 
+    errCount, referee, phone_code, phone_active, email_code, email_active, find_pwd_code, 
+    pay_pwd_code, login_status, elogincount, emark, prostatus
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from jc_core_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </select>
+  <select id="selectByUsername" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from jc_core_user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from jc_core_user
+    where user_id = #{userId,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sms.entity.CoreUser">
+    insert into jc_core_user (user_id, username, email, 
+      password, create_time, login_count, 
+      register_ip, last_login_time, last_login_ip, 
+      current_login_time, current_login_ip, reset_key, 
+      reset_pwd, errTime, errCount, 
+      referee, phone_code, phone_active, 
+      email_code, email_active, find_pwd_code, 
+      pay_pwd_code, login_status, elogincount, 
+      emark, prostatus)
+    values (#{userId,jdbcType=BIGINT}, #{username,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{password,jdbcType=CHAR}, #{createTime,jdbcType=TIMESTAMP}, #{loginCount,jdbcType=BIGINT}, 
+      #{registerIp,jdbcType=VARCHAR}, #{lastLoginTime,jdbcType=TIMESTAMP}, #{lastLoginIp,jdbcType=VARCHAR}, 
+      #{currentLoginTime,jdbcType=TIMESTAMP}, #{currentLoginIp,jdbcType=VARCHAR}, #{resetKey,jdbcType=CHAR}, 
+      #{resetPwd,jdbcType=CHAR}, #{errtime,jdbcType=TIMESTAMP}, #{errcount,jdbcType=INTEGER}, 
+      #{referee,jdbcType=VARCHAR}, #{phoneCode,jdbcType=VARCHAR}, #{phoneActive,jdbcType=INTEGER}, 
+      #{emailCode,jdbcType=VARCHAR}, #{emailActive,jdbcType=INTEGER}, #{findPwdCode,jdbcType=VARCHAR}, 
+      #{payPwdCode,jdbcType=VARCHAR}, #{loginStatus,jdbcType=INTEGER}, #{elogincount,jdbcType=INTEGER}, 
+      #{emark,jdbcType=INTEGER}, #{prostatus,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sms.entity.CoreUser">
+    insert into jc_core_user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="email != null">
+        email,
+      </if>
+      <if test="password != null">
+        password,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="loginCount != null">
+        login_count,
+      </if>
+      <if test="registerIp != null">
+        register_ip,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip,
+      </if>
+      <if test="currentLoginTime != null">
+        current_login_time,
+      </if>
+      <if test="currentLoginIp != null">
+        current_login_ip,
+      </if>
+      <if test="resetKey != null">
+        reset_key,
+      </if>
+      <if test="resetPwd != null">
+        reset_pwd,
+      </if>
+      <if test="errtime != null">
+        errTime,
+      </if>
+      <if test="errcount != null">
+        errCount,
+      </if>
+      <if test="referee != null">
+        referee,
+      </if>
+      <if test="phoneCode != null">
+        phone_code,
+      </if>
+      <if test="phoneActive != null">
+        phone_active,
+      </if>
+      <if test="emailCode != null">
+        email_code,
+      </if>
+      <if test="emailActive != null">
+        email_active,
+      </if>
+      <if test="findPwdCode != null">
+        find_pwd_code,
+      </if>
+      <if test="payPwdCode != null">
+        pay_pwd_code,
+      </if>
+      <if test="loginStatus != null">
+        login_status,
+      </if>
+      <if test="elogincount != null">
+        elogincount,
+      </if>
+      <if test="emark != null">
+        emark,
+      </if>
+      <if test="prostatus != null">
+        prostatus,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="userId != null">
+        #{userId,jdbcType=BIGINT},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginCount != null">
+        #{loginCount,jdbcType=BIGINT},
+      </if>
+      <if test="registerIp != null">
+        #{registerIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null">
+        #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="currentLoginTime != null">
+        #{currentLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentLoginIp != null">
+        #{currentLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="resetKey != null">
+        #{resetKey,jdbcType=CHAR},
+      </if>
+      <if test="resetPwd != null">
+        #{resetPwd,jdbcType=CHAR},
+      </if>
+      <if test="errtime != null">
+        #{errtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="errcount != null">
+        #{errcount,jdbcType=INTEGER},
+      </if>
+      <if test="referee != null">
+        #{referee,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneCode != null">
+        #{phoneCode,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneActive != null">
+        #{phoneActive,jdbcType=INTEGER},
+      </if>
+      <if test="emailCode != null">
+        #{emailCode,jdbcType=VARCHAR},
+      </if>
+      <if test="emailActive != null">
+        #{emailActive,jdbcType=INTEGER},
+      </if>
+      <if test="findPwdCode != null">
+        #{findPwdCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payPwdCode != null">
+        #{payPwdCode,jdbcType=VARCHAR},
+      </if>
+      <if test="loginStatus != null">
+        #{loginStatus,jdbcType=INTEGER},
+      </if>
+      <if test="elogincount != null">
+        #{elogincount,jdbcType=INTEGER},
+      </if>
+      <if test="emark != null">
+        #{emark,jdbcType=INTEGER},
+      </if>
+      <if test="prostatus != null">
+        #{prostatus,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sms.entity.CoreUser">
+    update jc_core_user
+    <set>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        email = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null">
+        password = #{password,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="loginCount != null">
+        login_count = #{loginCount,jdbcType=BIGINT},
+      </if>
+      <if test="registerIp != null">
+        register_ip = #{registerIp,jdbcType=VARCHAR},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginIp != null">
+        last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="currentLoginTime != null">
+        current_login_time = #{currentLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="currentLoginIp != null">
+        current_login_ip = #{currentLoginIp,jdbcType=VARCHAR},
+      </if>
+      <if test="resetKey != null">
+        reset_key = #{resetKey,jdbcType=CHAR},
+      </if>
+      <if test="resetPwd != null">
+        reset_pwd = #{resetPwd,jdbcType=CHAR},
+      </if>
+      <if test="errtime != null">
+        errTime = #{errtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="errcount != null">
+        errCount = #{errcount,jdbcType=INTEGER},
+      </if>
+      <if test="referee != null">
+        referee = #{referee,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneCode != null">
+        phone_code = #{phoneCode,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneActive != null">
+        phone_active = #{phoneActive,jdbcType=INTEGER},
+      </if>
+      <if test="emailCode != null">
+        email_code = #{emailCode,jdbcType=VARCHAR},
+      </if>
+      <if test="emailActive != null">
+        email_active = #{emailActive,jdbcType=INTEGER},
+      </if>
+      <if test="findPwdCode != null">
+        find_pwd_code = #{findPwdCode,jdbcType=VARCHAR},
+      </if>
+      <if test="payPwdCode != null">
+        pay_pwd_code = #{payPwdCode,jdbcType=VARCHAR},
+      </if>
+      <if test="loginStatus != null">
+        login_status = #{loginStatus,jdbcType=INTEGER},
+      </if>
+      <if test="elogincount != null">
+        elogincount = #{elogincount,jdbcType=INTEGER},
+      </if>
+      <if test="emark != null">
+        emark = #{emark,jdbcType=INTEGER},
+      </if>
+      <if test="prostatus != null">
+        prostatus = #{prostatus,jdbcType=INTEGER},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sms.entity.CoreUser">
+    update jc_core_user
+    set username = #{username,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      password = #{password,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      login_count = #{loginCount,jdbcType=BIGINT},
+      register_ip = #{registerIp,jdbcType=VARCHAR},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      last_login_ip = #{lastLoginIp,jdbcType=VARCHAR},
+      current_login_time = #{currentLoginTime,jdbcType=TIMESTAMP},
+      current_login_ip = #{currentLoginIp,jdbcType=VARCHAR},
+      reset_key = #{resetKey,jdbcType=CHAR},
+      reset_pwd = #{resetPwd,jdbcType=CHAR},
+      errTime = #{errtime,jdbcType=TIMESTAMP},
+      errCount = #{errcount,jdbcType=INTEGER},
+      referee = #{referee,jdbcType=VARCHAR},
+      phone_code = #{phoneCode,jdbcType=VARCHAR},
+      phone_active = #{phoneActive,jdbcType=INTEGER},
+      email_code = #{emailCode,jdbcType=VARCHAR},
+      email_active = #{emailActive,jdbcType=INTEGER},
+      find_pwd_code = #{findPwdCode,jdbcType=VARCHAR},
+      pay_pwd_code = #{payPwdCode,jdbcType=VARCHAR},
+      login_status = #{loginStatus,jdbcType=INTEGER},
+      elogincount = #{elogincount,jdbcType=INTEGER},
+      emark = #{emark,jdbcType=INTEGER},
+      prostatus = #{prostatus,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+</mapper>

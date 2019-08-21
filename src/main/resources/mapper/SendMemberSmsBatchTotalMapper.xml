@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sms.mapper.SendMemberSmsBatchTotalMapper">
+  <resultMap id="BaseResultMap" type="com.sms.entity.SendMemberSmsBatchTotal">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="batch_id" jdbcType="VARCHAR" property="batchId" />
+    <result column="total_send_count" jdbcType="BIGINT" property="totalSendCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="success_count" jdbcType="BIGINT" property="successCount" />
+    <result column="failed_count" jdbcType="BIGINT" property="failedCount" />
+    <result column="one_day_count" jdbcType="BIGINT" property="oneDayCount" />
+    <result column="one_week_count" jdbcType="BIGINT" property="oneWeekCount" />
+    <result column="fifteenth_count" jdbcType="BIGINT" property="fifteenthCount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, batch_id, total_send_count, create_time, success_count, failed_count, one_day_count, 
+    one_week_count, fifteenth_count
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from send_member_sms_batch_total
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByBatchId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from send_member_sms_batch_total
+    where batch_id = #{batchId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from send_member_sms_batch_total
+  </select>
+  <select id="selectSumTotalSendCount" resultType="java.lang.Long">
+    SELECT
+	IFNULL(sum(total_send_count), 0)
+    FROM
+        send_member_sms_batch_total
+  </select>
+  <select id="selectSumSuccessCount" resultType="java.lang.Long">
+    SELECT
+	IFNULL(sum(success_count), 0)
+    FROM
+        send_member_sms_batch_total
+  </select>
+  <select id="selectSumFailedCount" resultType="java.lang.Long">
+    SELECT
+	IFNULL(sum(failed_count), 0)
+    FROM
+        send_member_sms_batch_total
+  </select>
+  <select id="selectSumOneDayCount" resultType="java.lang.Long">
+    SELECT
+	IFNULL(sum(one_day_count), 0)
+    FROM
+	  send_member_sms_batch_total
+  </select>
+  <select id="selectSumOneWeekCount" resultType="java.lang.Long">
+    SELECT
+	IFNULL(sum(one_week_count), 0)
+    FROM
+        send_member_sms_batch_total
+  </select>
+  <select id="selectSumFifteenthCount" resultType="java.lang.Long">
+    SELECT
+	IFNULL(sum(fifteenth_count), 0)
+    FROM
+        send_member_sms_batch_total
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from send_member_sms_batch_total
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sms.entity.SendMemberSmsBatchTotal">
+    insert into send_member_sms_batch_total (id, batch_id, total_send_count, 
+      create_time, success_count, failed_count, 
+      one_day_count, one_week_count, fifteenth_count
+      )
+    values (#{id,jdbcType=BIGINT}, #{batchId,jdbcType=VARCHAR}, #{totalSendCount,jdbcType=BIGINT}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{successCount,jdbcType=BIGINT}, #{failedCount,jdbcType=BIGINT}, 
+      #{oneDayCount,jdbcType=BIGINT}, #{oneWeekCount,jdbcType=BIGINT}, #{fifteenthCount,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.sms.entity.SendMemberSmsBatchTotal">
+    insert into send_member_sms_batch_total
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="batchId != null">
+        batch_id,
+      </if>
+      <if test="totalSendCount != null">
+        total_send_count,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="successCount != null">
+        success_count,
+      </if>
+      <if test="failedCount != null">
+        failed_count,
+      </if>
+      <if test="oneDayCount != null">
+        one_day_count,
+      </if>
+      <if test="oneWeekCount != null">
+        one_week_count,
+      </if>
+      <if test="fifteenthCount != null">
+        fifteenth_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="batchId != null">
+        #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalSendCount != null">
+        #{totalSendCount,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="successCount != null">
+        #{successCount,jdbcType=BIGINT},
+      </if>
+      <if test="failedCount != null">
+        #{failedCount,jdbcType=BIGINT},
+      </if>
+      <if test="oneDayCount != null">
+        #{oneDayCount,jdbcType=BIGINT},
+      </if>
+      <if test="oneWeekCount != null">
+        #{oneWeekCount,jdbcType=BIGINT},
+      </if>
+      <if test="fifteenthCount != null">
+        #{fifteenthCount,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sms.entity.SendMemberSmsBatchTotal">
+    update send_member_sms_batch_total
+    <set>
+      <if test="batchId != null">
+        batch_id = #{batchId,jdbcType=VARCHAR},
+      </if>
+      <if test="totalSendCount != null">
+        total_send_count = #{totalSendCount,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="successCount != null">
+        success_count = #{successCount,jdbcType=BIGINT},
+      </if>
+      <if test="failedCount != null">
+        failed_count = #{failedCount,jdbcType=BIGINT},
+      </if>
+      <if test="oneDayCount != null">
+        one_day_count = #{oneDayCount,jdbcType=BIGINT},
+      </if>
+      <if test="oneWeekCount != null">
+        one_week_count = #{oneWeekCount,jdbcType=BIGINT},
+      </if>
+      <if test="fifteenthCount != null">
+        fifteenth_count = #{fifteenthCount,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sms.entity.SendMemberSmsBatchTotal">
+    update send_member_sms_batch_total
+    set batch_id = #{batchId,jdbcType=VARCHAR},
+      total_send_count = #{totalSendCount,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      success_count = #{successCount,jdbcType=BIGINT},
+      failed_count = #{failedCount,jdbcType=BIGINT},
+      one_day_count = #{oneDayCount,jdbcType=BIGINT},
+      one_week_count = #{oneWeekCount,jdbcType=BIGINT},
+      fifteenth_count = #{fifteenthCount,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

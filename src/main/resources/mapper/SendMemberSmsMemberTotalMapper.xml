@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sms.mapper.SendMemberSmsMemberTotalMapper">
+  <resultMap id="BaseResultMap" type="com.sms.entity.SendMemberSmsMemberTotal">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="member_id" jdbcType="BIGINT" property="memberId" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="send_count" jdbcType="BIGINT" property="sendCount" />
+    <result column="last_send_time" jdbcType="TIMESTAMP" property="lastSendTime" />
+    <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+    <result column="member_type" jdbcType="INTEGER" property="memberType" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, member_id, mobile, create_time, send_count, last_send_time, last_login_time, 
+    member_type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from send_member_sms_member_total
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByMobile" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from send_member_sms_member_total
+    where mobile = #{mobile,jdbcType=VARCHAR}
+  </select>
+  <select id="selectMemberCount"  resultType="java.lang.Long">
+    select
+    count(1)
+    from send_member_sms_member_total
+  </select>
+  <select id="selectAll"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from send_member_sms_member_total
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from send_member_sms_member_total
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sms.entity.SendMemberSmsMemberTotal">
+    insert into send_member_sms_member_total (id, member_id, mobile, 
+      create_time, send_count, last_send_time, 
+      last_login_time, member_type)
+    values (#{id,jdbcType=BIGINT}, #{memberId,jdbcType=BIGINT}, #{mobile,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{sendCount,jdbcType=BIGINT}, #{lastSendTime,jdbcType=TIMESTAMP}, 
+      #{lastLoginTime,jdbcType=TIMESTAMP}, #{memberType,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sms.entity.SendMemberSmsMemberTotal">
+    insert into send_member_sms_member_total
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="memberId != null">
+        member_id,
+      </if>
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="sendCount != null">
+        send_count,
+      </if>
+      <if test="lastSendTime != null">
+        last_send_time,
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time,
+      </if>
+      <if test="memberType != null">
+        member_type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="memberId != null">
+        #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendCount != null">
+        #{sendCount,jdbcType=BIGINT},
+      </if>
+      <if test="lastSendTime != null">
+        #{lastSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null">
+        #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberType != null">
+        #{memberType,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sms.entity.SendMemberSmsMemberTotal">
+    update send_member_sms_member_total
+    <set>
+      <if test="memberId != null">
+        member_id = #{memberId,jdbcType=BIGINT},
+      </if>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="sendCount != null">
+        send_count = #{sendCount,jdbcType=BIGINT},
+      </if>
+      <if test="lastSendTime != null">
+        last_send_time = #{lastSendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastLoginTime != null">
+        last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="memberType != null">
+        member_type = #{memberType,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sms.entity.SendMemberSmsMemberTotal">
+    update send_member_sms_member_total
+    set member_id = #{memberId,jdbcType=BIGINT},
+      mobile = #{mobile,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      send_count = #{sendCount,jdbcType=BIGINT},
+      last_send_time = #{lastSendTime,jdbcType=TIMESTAMP},
+      last_login_time = #{lastLoginTime,jdbcType=TIMESTAMP},
+      member_type = #{memberType,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

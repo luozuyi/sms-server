@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sms.mapper.SendMemberSmsTotalMapper">
+  <resultMap id="BaseResultMap" type="com.sms.entity.SendMemberSmsTotal">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="total_send_count" jdbcType="BIGINT" property="totalSendCount" />
+    <result column="success_count" jdbcType="BIGINT" property="successCount" />
+    <result column="failed_count" jdbcType="BIGINT" property="failedCount" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="total_member_count" jdbcType="BIGINT" property="totalMemberCount" />
+    <result column="login_member_count" jdbcType="BIGINT" property="loginMemberCount" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, total_send_count, success_count, failed_count, create_time, total_member_count, 
+    login_member_count
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from send_member_sms_total
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from send_member_sms_total
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.sms.entity.SendMemberSmsTotal">
+    insert into send_member_sms_total (id, total_send_count, success_count, 
+      failed_count, create_time, total_member_count, 
+      login_member_count)
+    values (#{id,jdbcType=BIGINT}, #{totalSendCount,jdbcType=BIGINT}, #{successCount,jdbcType=BIGINT}, 
+      #{failedCount,jdbcType=BIGINT}, #{createTime,jdbcType=TIMESTAMP}, #{totalMemberCount,jdbcType=BIGINT}, 
+      #{loginMemberCount,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.sms.entity.SendMemberSmsTotal">
+    insert into send_member_sms_total
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="totalSendCount != null">
+        total_send_count,
+      </if>
+      <if test="successCount != null">
+        success_count,
+      </if>
+      <if test="failedCount != null">
+        failed_count,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="totalMemberCount != null">
+        total_member_count,
+      </if>
+      <if test="loginMemberCount != null">
+        login_member_count,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="totalSendCount != null">
+        #{totalSendCount,jdbcType=BIGINT},
+      </if>
+      <if test="successCount != null">
+        #{successCount,jdbcType=BIGINT},
+      </if>
+      <if test="failedCount != null">
+        #{failedCount,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalMemberCount != null">
+        #{totalMemberCount,jdbcType=BIGINT},
+      </if>
+      <if test="loginMemberCount != null">
+        #{loginMemberCount,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.sms.entity.SendMemberSmsTotal">
+    update send_member_sms_total
+    <set>
+      <if test="totalSendCount != null">
+        total_send_count = #{totalSendCount,jdbcType=BIGINT},
+      </if>
+      <if test="successCount != null">
+        success_count = #{successCount,jdbcType=BIGINT},
+      </if>
+      <if test="failedCount != null">
+        failed_count = #{failedCount,jdbcType=BIGINT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="totalMemberCount != null">
+        total_member_count = #{totalMemberCount,jdbcType=BIGINT},
+      </if>
+      <if test="loginMemberCount != null">
+        login_member_count = #{loginMemberCount,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.sms.entity.SendMemberSmsTotal">
+    update send_member_sms_total
+    set total_send_count = #{totalSendCount,jdbcType=BIGINT},
+      success_count = #{successCount,jdbcType=BIGINT},
+      failed_count = #{failedCount,jdbcType=BIGINT},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      total_member_count = #{totalMemberCount,jdbcType=BIGINT},
+      login_member_count = #{loginMemberCount,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
